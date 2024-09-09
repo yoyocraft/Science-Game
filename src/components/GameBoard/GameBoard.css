@@ -1,7 +1,6 @@
 .game-board {
     display: grid;
     grid-template-columns: repeat(4, 60px);
-    /* 调整网格大小 */
     gap: 5px;
     justify-content: center;
     align-items: center;

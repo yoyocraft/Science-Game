@@ -1,7 +1,6 @@
 import React from "react";
 import "./ControlPanel.css";
 
-// ControlPanel 组件
 const ControlPanel = ({ onStart, onReset }) => {
   return (
     <div className="control-panel">

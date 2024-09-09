@@ -1,10 +1,9 @@
 import React from "react";
 import "./Tile.css";
 
-// Tile 组件
-const Tile = ({ image, altText, onClick }) => {
+const Tile = ({ image, altText, onClick, isSelected }) => {
   return (
-    <div className="tile" onClick={onClick}>
+    <div className={`tile ${isSelected ? "selected" : ""}`} onClick={onClick}>
       <img src={image} alt={altText} className="tile-image" />
     </div>
   );

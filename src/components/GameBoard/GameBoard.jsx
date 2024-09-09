@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./GameBoard.css"; // 导入样式
+import "./GameBoard.css";
+import Tile from "../Tile/Tile";
 
-// 导入素材图片
 import amara from "../../assets/amara.png";
 import blank from "../../assets/blank.png";
 import empty from "../../assets/empty.png";
@@ -10,7 +10,6 @@ import moze from "../../assets/moze.png";
 import spacer from "../../assets/spacer.png";
 import zane from "../../assets/zane.png";
 
-// 定义图片映射
 const imageMap = {
   amara,
   blank,
@@ -29,15 +28,57 @@ const initialGrid = [
   ["blank", "amara", "spacer", "flak"],
 ];
 
-const GameBoard = () => {
+const GameBoard = ({ onMatch, onMismatch }) => {
   const [grid, setGrid] = useState(initialGrid);
+  const [selectedTiles, setSelectedTiles] = useState([]);
 
-  // 渲染单元格
+  const handleTileClick = (rowIndex, colIndex) => {
+    if (
+      selectedTiles.length < 2 &&
+      !selectedTiles.some(
+        (tile) => tile.rowIndex === rowIndex && tile.colIndex === colIndex
+      )
+    ) {
+      const newSelectedTiles = [...selectedTiles, { rowIndex, colIndex }];
+      setSelectedTiles(newSelectedTiles);
+
+      // 当选中两个 Tile 时，检查是否匹配
+      if (newSelectedTiles.length === 2) {
+        checkForMatch(newSelectedTiles);
+      }
+    }
+  };
+
+  // 检查匹配逻辑
+  const checkForMatch = (tiles) => {
+    const [firstTile, secondTile] = tiles;
+    const firstImage = grid[firstTile.rowIndex][firstTile.colIndex];
+    const secondImage = grid[secondTile.rowIndex][secondTile.colIndex];
+
+    if (firstImage === secondImage) {
+      onMatch();
+    } else {
+      onMismatch();
+    }
+
+    setTimeout(() => {
+      setSelectedTiles([]);
+    }, 500);
+  };
+
   const renderCell = (cell, rowIndex, colIndex) => {
+    const isSelected = selectedTiles.some(
+      (tile) => tile.rowIndex === rowIndex && tile.colIndex === colIndex
+    );
+
     return (
-      <div key={`${rowIndex}-${colIndex}`} className="grid-cell">
-        <img src={imageMap[cell]} alt={cell} className="cell-image" />
-      </div>
+      <Tile
+        key={`${rowIndex}-${colIndex}`}
+        image={imageMap[cell]}
+        altText={cell}
+        onClick={() => handleTileClick(rowIndex, colIndex)}
+        isSelected={isSelected}
+      />
     );
   };
 

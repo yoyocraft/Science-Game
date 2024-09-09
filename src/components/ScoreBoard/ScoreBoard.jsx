@@ -1,7 +1,6 @@
 import React from "react";
 import "./ScoreBoard.css";
 
-// ScoreBoard 组件
 const ScoreBoard = ({ score, matches }) => {
   return (
     <div className="score-board">
