@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import GameBoard from './components/GameBoard/GameBoard.jsx';
+import ScoreBoard from './components/ScoreBoard/ScoreBoard.jsx';
+import ControlPanel from './components/ControlPanel/ControlPanel.jsx';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [score, setScore] = useState(0);
+  const [matches, setMatches] = useState(0);
+
+  // 开始游戏的逻辑
+  const handleStart = () => {
+    console.log('Game Started');
+    // 可以在这里初始化游戏状态
+  };
+
+  // 重置游戏的逻辑
+  const handleReset = () => {
+    setScore(0);
+    setMatches(0);
+    console.log('Game Reset');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <ScoreBoard score={score} matches={matches} />
+      <GameBoard />
+      <ControlPanel onStart={handleStart} onReset={handleReset} />
     </div>
   );
-}
+};
 
 export default App;

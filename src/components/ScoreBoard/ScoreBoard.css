@@ -1,0 +1,18 @@
+.score-board {
+    margin: 20px;
+    padding: 10px;
+    background-color: #eaeaea;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.score-board h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.score-board p {
+    margin: 5px 0;
+    color: #666;
+}

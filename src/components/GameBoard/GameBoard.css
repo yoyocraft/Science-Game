@@ -1,0 +1,25 @@
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    /* 调整网格大小 */
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.grid-cell {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+}
+
+.cell-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
